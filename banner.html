@@ -26,10 +26,10 @@
         <div class="layui-side ">
             <div class="layui-side-scroll">
                 <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                    <li class="layui-nav-item">
+                    <li class="layui-nav-item layui-this">
                         <a class="" href="index.html">频道管理</a>
                     </li>
-                    <li class="layui-nav-item layui-this">
+                    <li class="layui-nav-item">
                         <a href="column.html">栏目管理</a>
                     </li>
                     <li class="layui-nav-item"><a href="article.html">文章管理</a></li>
@@ -38,57 +38,45 @@
             </div>
         </div>
         <!-- 右侧内容区域 -->
-        <div class="layui-body column-body">
+        <div class="layui-body banner-body">
             <h2 class="layui-body-title">
-                栏目管理
-                <button class="layui-btn layui-btn-danger fl-r" style="margin-top: 12px;" onclick="$('.mask-column').show()" >+ 新增</button>
+                banner管理
+                <button class="layui-btn layui-btn-danger fl-r" style="margin-top: 12px;" onclick="$('.mask-benner').show()" >+ 新增</button>
             </h2>
             <div class="content tag-content">
                 <table id="tableBox" lay-filter="tableBox"></table>
             </div>
         </div>
-        <div class="mask  mask-column">
+        <div class="mask  mask-benner">
             <div class="mask-bg"></div>
             <div class="mask-container">
-                <h2><span>新增栏目</span>
+                <h2><span>新增banner</span>
                 <i class="btn-x closeMask"></i>
                 </h2>
-                <form class="layui-form ">
-                    <div class="layui-form-item fl-50 ">
-                        <label class="layui-form-label "><i class="required">*</i>栏目名称：</label>
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><i class="required">*</i>名称：</label>
                         <div class="layui-input-block">
                             <input type="text" name="name" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
                         </div>
                     </div>
-                    <div class="layui-form-item fl-50">
-                        <label class="layui-form-label"><i class="required">*</i>排序：</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="orderNum" required lay-verify="required" placeholder="请输入序号" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-form-item fl-50">
-                        <label class="layui-form-label"><i class="required">*</i>导航显示：</label>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><i class="required">*</i>显示状态：</label>
                         <div class="layui-input-block">
                             <input type="radio" name="visible" value="0" title="隐藏">
                             <input type="radio" name="visible" value="1" title="显示" checked>
                         </div>
                     </div>
-                    <div class="layui-form-item fl-50">
-                        <label class="layui-form-label">标题：</label>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">跳转地址：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="title" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-form-item ">
-                        <label class="layui-form-label">关键词：</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="keyword" placeholder="请输入关键词" autocomplete="off" class="layui-input">
+                            <input type="text" name="url" placeholder="请输入跳转地址" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item layui-form-text">
-                        <label class="layui-form-label">描述：</label>
+                        <label class="layui-form-label">摘要：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="desc" placeholder="请输入描述" autocomplete="off" class="layui-input">
+                            <input type="text" name="summary" placeholder="请输入摘要" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-upload hide">
@@ -105,60 +93,49 @@
                         </div>
                     </div>
                     <div class="mask-btn-box">
-                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="columnBtn">确定</button>
+                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="bannerBtn">确定</button>
                         <div class="layui-btn layui-btn-primary closeMask">取消</div>
                     </div>
                 </form>
             </div>
         </div>
-        <div class="mask  mask-column-edit">
+        <div class="mask  mask-banner-edit">
             <div class="mask-bg"></div>
             <div class="mask-container">
-                <h2><span>修改栏目</span>
+                <h2><span>修改banner</span>
                 <i class="btn-x closeMask"></i>
                 </h2>
-                <form class="layui-form ">
+                <form class="layui-form">
                     <div class="layui-upload hide">
                         <label class="layui-form-label">id：</label>
                         <div class="layui-upload-list">
                             <input type="text" name="id" placeholder="请输入id" autocomplete="off" class="layui-input ">
                         </div>
                     </div>
-                    <div class="layui-form-item fl-50 ">
-                        <label class="layui-form-label "><i class="required">*</i>栏目名称：</label>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><i class="required">*</i>名称：</label>
                         <div class="layui-input-block">
                             <input type="text" name="name" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
                         </div>
                     </div>
-                    <div class="layui-form-item fl-50">
-                        <label class="layui-form-label"><i class="required">*</i>排序：</label>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><i class="required">*</i>显示状态：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="orderNum" required lay-verify="required" placeholder="请输入序号" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-form-item fl-50">
-                        <label class="layui-form-label"><i class="required">*</i>导航显示：</label>
-                        <div class="layui-input-block">
+                            <!-- checked -->
                             <input type="radio" name="visible" value="0" title="隐藏">
                             <input type="radio" name="visible" value="1" title="显示">
                         </div>
                     </div>
-                    <div class="layui-form-item fl-50">
-                        <label class="layui-form-label">标题：</label>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">跳转地址：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="title" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">关键词：</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="keyword" placeholder="请输入关键词" autocomplete="off" class="layui-input">
+                            <input type="text" name="url" placeholder="请输入跳转地址" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item layui-form-text">
-                        <label class="layui-form-label">描述：</label>
+                        <label class="layui-form-label">摘要：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="desc" placeholder="请输入描述" autocomplete="off" class="layui-input">
+                            <input type="text" name="summary" placeholder="请输入摘要" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-upload hide">
@@ -175,7 +152,7 @@
                         </div>
                     </div>
                     <div class="mask-btn-box">
-                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="columnBtn-edit">确定</button>
+                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="bannerBtn-edit">确定</button>
                         <div class="layui-btn layui-btn-primary closeMask">取消</div>
                     </div>
                 </form>
@@ -186,25 +163,24 @@
     <script src="jslib/layui/layui.js"></script>
     <script src="js/main.js"></script>
     <script>
-    layui.use(['element', 'layer', 'form', 'table', 'upload'], function() {
+    layui.use(['element', 'layer', 'form', 'upload', 'table'], function() {
         var element = layui.element,
-            table = layui.table,
             layer = layui.layer,
             form = layui.form,
+            table = layui.table,
             $ = layui.jquery,
             upload = layui.upload;
         // 表格
         var tableIns = table.render({
             elem: "#tableBox",
-            url: 'http://10.10.67.5:9902/seoInformation/column/listByPage',
+            url: 'http://10.10.67.5:9902/seoInformation/banner/listByPage',
             cols: [
                 [ //表头
                     { field: 'id', title: '序号', sort: true },
-                    { field: 'name', title: '栏目名称' },
-                    { field: 'orderNum', title: '排序' },
+                    { field: 'name', title: 'banner名称' },
                     { field: 'visible', title: '显示状态' },
-                    { field: 'href', title: '栏目路径', sort: true },
-                    { field: 'createUid', title: '创建人' },
+                    { field: 'url', title: '跳转地址' },
+                    { field: 'clickNum', title: '点击数', sort: true },
                     { field: 'createTime', title: '创建时间', sort: true },
                     { title: '操作', minWidth: 150, align: 'center', toolbar: '#barDemo' }
                 ]
@@ -235,34 +211,28 @@
             var tr = obj.tr; //获得当前行 tr 的DOM对象
             if (layEvent === 'del') { //删除
                 layer.confirm('真的删除行么', function(index) {
-                    ajaxBox({ id: data.id }, '/column/remove')
-                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                    ajaxBox({ id: data.id }, '/banner/remove')
+                    obj.del();
                     layer.close(index);
                 });
             } else if (layEvent === 'edit') { //编辑
-                $('.mask-column-edit').show();
-                $('.mask-column-edit').find('input[name$="id"]').val(data.id);
-                $('.mask-column-edit').find('input[name$="name"]').val(data.name);
-                $('.mask-column-edit').find('input[name$="orderNum"]').val(data.orderNum);
-                $('.mask-column-edit').find('input[name$="title"]').val(data.title);
-                $('.mask-column-edit').find('input[name$="keyword"]').val(data.keyword);
-                $('.mask-column-edit').find('input[name$="desc"]').val(data.desc);
-                $('.mask-column-edit').find('.uploadImg-edit').attr('src', data.pictureUrl);
+                $('.mask-banner-edit').show();
+                $('.mask-banner-edit').find('input[name$="id"]').val(data.id);
+                $('.mask-banner-edit').find('input[name$="name"]').val(data.name);
+                $('.mask-banner-edit').find('input[name$="title"]').val(data.title);
+                $('.mask-banner-edit').find('input[name$="url"]').val(data.url);
+                $('.mask-banner-edit').find('input[name$="summary"]').val(data.summary);
+                $('.mask-banner-edit').find('.uploadImg-edit').attr('src', data.pictureUrl);
                 // 单选
-                $('.mask-column-edit').find('input[name$="visible"]')[data.visible].checked = 'checked';
-                $('.mask-column-edit').find(".layui-form-radio").eq(data.visible).addClass("layui-form-radioed").siblings(".layui-form-radio").removeClass("layui-form-radioed");
-                //同步更新缓存对应的值
-                // obj.update({
-                //     username: '123',
-                //     title: 'xxx'
-                // });
+                $('.mask-banner-edit').find('input[name$="visible"]')[data.visible].checked = 'checked';
+                $('.mask-banner-edit').find(".layui-form-radio").eq(data.visible).addClass("layui-form-radioed").siblings(".layui-form-radio").removeClass("layui-form-radioed");
             }
         });
         // ----------编辑项目
         // 图片上传
         var uploadInstEdit = upload.render({
             elem: '.uploadBtn-edit',
-            url: 'http://10.10.67.5:9902/seoInformation/column/uploadImg',
+            url: 'http://10.10.67.5:9902/seoInformation/banner/uploadImg',
             field: 'file',
             before: function(obj) {
                 //预读本地文件示例，不支持ie8
@@ -279,24 +249,24 @@
                 $(".pictureUrl-edit").val(res.data.src);
             },
             error: function() {
-                //演示失败状态，并实现重传 
+                //演示失败状态，并实现重传
                 var uploadText = $('.uploadText-edit');
                 uploadText.html('<span >上传失败请</span> <a class="reload-btn-edit" style="color:red;text-decoration: underline;">重试</a>');
                 uploadText.find('.reload-btn-edit').on('click', function() {
-                    uploadInstEdit.upload();
+                    uploadInst.upload();
                 });
             }
         });
         // 提交
-        form.on('submit(columnBtn-edit)', function(data) {
-            ajaxBox(data.field, "/column/create", "column.html")
+        form.on('submit(bannerBtn-edit)', function(data) {
+            ajaxBox(data.field, "/banner/modify", "banner.html")
             return false;
         });
         // ----------新增项目
         // 图片上传
         var uploadInst = upload.render({
             elem: '.uploadBtn',
-            url: 'http://10.10.67.5:9902/seoInformation/column/uploadImg',
+            url: 'http://10.10.67.5:9902/seoInformation/banner/uploadImg',
             field: 'file',
             before: function(obj) {
                 //预读本地文件示例，不支持ie8
@@ -316,14 +286,14 @@
                 //演示失败状态，并实现重传
                 var uploadText = $('.uploadText');
                 uploadText.html('<span >上传失败请</span> <a class="reload-btn" style="color:red;text-decoration: underline;">重试</a>');
-                uploadText.find('.demo-reload').on('click', function() {
+                uploadText.find('.reload-btn').on('click', function() {
                     uploadInst.upload();
                 });
             }
         });
         // 提交
-        form.on('submit(columnBtn)', function(data) {
-            ajaxBox(data.field, "/column/create", "column.html")
+        form.on('submit(bannerBtn)', function(data) {
+            ajaxBox(data.field, "/banner/create", "banner.html")
             return false;
         });
     });

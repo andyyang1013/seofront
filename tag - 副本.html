@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="jslib/layui/css/layui.css">
     <link rel="stylesheet" href="css/main.css">
     <title>贷财行SEO资讯管理后台系统</title>
 </head>
+
 <body class="layui-layout-body container">
     <div class="layui-layout layui-layout-admin">
         <!-- 头部区域 -->
@@ -17,6 +19,10 @@
                     <a href="javascript:;">
                         管理员：<span>名字</span>
                     </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">基本资料</a></dd>
+                        <dd><a href="">安全设置</a></dd>
+                    </dl>
                 </li>
                 <li class="layui-nav-item"><a href="javascript:;" onclick="$('.mask-psw').show()">修改密码</a></li>
                 <li class="layui-nav-item"><a href="login.html">退出</a></li>
@@ -54,6 +60,36 @@
                     <button class="layui-btn reset-btn">重置</button>
                     <button class="layui-btn layui-btn-danger fl-r" onclick="$('.mask-tag').show()">+ 新增</button>
                 </div>
+            </div>
+            <div class="content tag-content">
+                <ul class="list tag-list" id="list">
+                    <div class="list-title">
+                        <span>序号</span>
+                        <span>栏目名称</span>
+                        <span>创建人</span>
+                        <span>创建时间</span>
+                        <span>操作</span>
+                    </div>
+                    <li data-id="01">
+                        <div>01</div>
+                        <div>理财理财理财</div>
+                        <div>admin</div>
+                        <div>1234.12.34 56:78:90</div>
+                        <div><a href="javascript:;" class="edit-btn">修改</a><a href="javascript:;" class="del-btn">删除</a></div>
+                    </li>
+                    <li data-id="02">
+                        <div>02</div>
+                        <div>理财理财理财</div>
+                        <div>admin</div>
+                        <div>1234.12.34 56:78:90</div>
+                        <div><a href="javascript:;" class="edit-btn">修改</a><a href="javascript:;" class="del-btn">删除</a></div>
+                    </li>
+                </ul>
+                <div id="listPage">
+                </div>
+                <!-- <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
+                  <button data-method="setTop" class="layui-btn">删除</button>
+                </div> -->
             </div>
             <div class="content tag-content">
                 <table id="tableBox" lay-filter="tableBox"></table>
@@ -104,16 +140,10 @@
                 <i class="btn-x closeMask"></i>
                 </h2>
                 <form class="layui-form ">
-                    <div class="layui-upload hide">
-                        <label class="layui-form-label">id：</label>
-                        <div class="layui-upload-list">
-                            <input type="text" name="id" placeholder="请输入描述" autocomplete="off" class="layui-input ">
-                        </div>
-                    </div>
                     <div class="layui-form-item  ">
-                        <label class="layui-form-label "><i class="required">*</i>ID：</label>
+                        <label class="layui-form-label "><i class="required">*</i>名称：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="name" required lay-verify="required" placeholder="请输入ID" autocomplete="off" class="layui-input">
+                            <input type="text" name="name" required lay-verify="required" value='有了吧' placeholder="请输入名称" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item ">
@@ -146,110 +176,138 @@
     <script src="jslib/layui/layui.js"></script>
     <script src="js/main.js"></script>
     <script>
-    layui.use(['element', 'layer', 'form', 'table'], function() {
+    // var data = ['a', 'b'];
+    layui.use(['element', 'laypage', 'layer', 'form', 'table'], function() {
         var element = layui.element,
+            laypage = layui.laypage,
             layer = layui.layer,
             form = layui.form,
             table = layui.table,
             $ = layui.jquery;
+        laypage.render({
+            elem: 'listPage',
+            count: 50,
+            // count: data.length,
+            layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip'],
+            // jump: function(obj) {
+            //    //模拟渲染
+            //       document.getElementById('list').innerHTML = function(){
+            //         var arr = []
+            //         ,thisData = data.concat().splice(obj.curr*obj.limit - obj.limit, obj.limit);
+            //         layui.each(thisData, function(index, item){
+            //           arr.push('<li>'+ item +'</li>');
+            //         });
+            //         return arr.join('');
+            //       }();
+            // }
+        });
         // 表格
-        var tableIns = table.render({
+        table.render({
             elem: "#tableBox",
-            url: 'http://10.10.67.5:9902/seoInformation/tag/listByPage',
+            url: 'http://10.10.67.5:9902/seoInformation/article/listByPage',
+            page: true,
+            skin: 'line',
             cols: [
                 [ //表头
                     { field: 'id', title: '序号', sort: true },
-                    { field: 'name', title: '标签名称' },
+                    { field: 'name', title: '栏目名称' },
                     { field: 'createUid', title: '创建人' },
                     { field: 'createTime', title: '创建时间', sort: true },
-                    { title: '操作', minWidth: 150, align: 'center', toolbar: '#barDemo' }
+                    { title: '操作', width: 200, align: 'center', toolbar: '#barDemo' }
                 ]
             ],
-            page: true,
-            skin: 'line',
-            request: {
-                pageName: 'pageNum',
-                limitName: 'pageSize'
-            },
+            page: 1,
+            limit: '10',
             id: "tableBoxTest"
         })
         //监听工具条-查看-修改-删除
-        table.on('tool(tableBox)', function(obj) {
+        table.on('tool(tableBox)', function(obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
-            if (layEvent === 'del') { //删除
+            if (layEvent === 'detail') { //查看
+                layer.msg('ID：' + data.id + ' 的查看操作');
+            } else if (layEvent === 'del') { //删除
                 layer.confirm('真的删除行么', function(index) {
-                    ajaxBox({ id: data.id }, '/tag/remove')
+                    ajaxDel(data.id, '/article/remove')
                     obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                     layer.close(index);
                 });
             } else if (layEvent === 'edit') { //编辑
-                $('.mask-tag-edit').show();
-                $('.mask-tag-edit').find('input[name$="id"]').val(data.id);
-                $('.mask-tag-edit').find('input[name$="name"]').val(data.name);
-                $('.mask-tag-edit').find('input[name$="title"]').val(data.title);
-                $('.mask-tag-edit').find('input[name$="keyword"]').val(data.keyword);
-                $('.mask-tag-edit').find('input[name$="desc"]').val(data.desc);
+                layer.alert('整行数据：<br>' + JSON.stringify(data) + '<br>单条数据:<br>' + data.username)
                 //同步更新缓存对应的值
-                // obj.update({
-                //     username: '123',
-                //     title: 'xxx'
-                // });
+                obj.update({
+                    username: '123',
+                    title: 'xxx'
+                });
             }
         });
-        // ----------编辑项目
+        // 监听编辑 
+        // table.on('edit(tableBox)', function(obj){ //注：edit是固定事件名，test是table原始容器的属性 lay-filter="对应的值"
+        //       console.log(obj.value); //得到修改后的值
+        //       console.log(obj.field); //当前编辑的字段名
+        //       console.log(obj.data); //所在行的所有相关数据  
+        //     });
+        // 列表搜索-无效
+        $(".search-btn").on("click", function() {
+            table.reload('tableBoxTest', {
+                where: {
+                    key: {
+                        id: $(".search-input").val()
+                    }
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+
+            });
+        })
+        // 列表重置
+        $(".reset-btn").on("click", function() {
+            table.reload('tableBoxTest', {
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        })
+        // ----------操作项目
+        // -----操作-编辑
+        $('#list').on('click', '.edit-btn', function() {
+            var id = $(this).parent().parent().data('id');
+            $('.mask-tag-edit').show();
+            var eName = id,
+                eTitle = '02',
+                eKeyword = '03',
+                eDesc = '04';
+            $('.mask-tag-edit').find('input[name$="name"]').val(eName);
+            $('.mask-tag-edit').find('input[name$="title"]').val(eTitle);
+            $('.mask-tag-edit').find('input[name$="keyword"]').val(eKeyword);
+            $('.mask-tag-edit').find('input[name$="desc"]').val(eDesc);
+        });
         // 提交
         form.on('submit(tagEditBtn)', function(data) {
-            ajaxBox(data.field, "/tag/modify", "tag.html")
+            ajaxBox(data, "/tag/modify", "tag.html")
             return false;
+        });
+        // -----操作-删除
+        $('#list').on('click', '.del-btn', function() {
+            var id = $(this).parent().parent().data('id');
+            ajaxYN('/tag/remove', 'tag.html', id)
         });
         // ----------新增项目
         // 提交
         form.on('submit(tagBtn)', function(data) {
-            ajaxBox(data.field, "/tag/create", "tag.html")
+            ajaxBox(data, "/tag/create", "tag.html")
             return false;
         });
-        // ----------搜索-重置项目        无效
-        // 搜索
-        $(".search-btn").on("click", function() {
-            tableIns.reload({
-                // 设定后台交互的参数
-                url:'http://10.10.67.5:9902/seoInformation/tag/view',
-                where: {
-                    id: $(".search-input").val(),
-                },
-                page: {
-                    curr: 1 //重新从第 1 页开始
-                },
-                done:function(msg){
-                    if (!msg.code==0) {
-                        layer.alert(msg.msg, { icon: 5 },function(){
-                            tableIns.reload({
-                                url:'http://10.10.67.5:9902/seoInformation/tag/listByPage',
-                                page: {
-                                    curr: 1 //重新从第 1 页开始
-                                }
-                            });
-                        });
-                    }
-                }
-            });
-        })
-        // 重置
-        $(".reset-btn").on("click", function() {
-            tableIns.reload({
-                page: {
-                    curr: 1 //重新从第 1 页开始
-                }
-            });
-        })
     });
     </script>
     <!-- 工具条 -->
     <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
 </body>
+
 </html>
