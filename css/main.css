@@ -235,6 +235,7 @@ i {
 /*后台*/
 .container {
     min-width: 1300px;
+    overflow: auto;
 }
 /*头部区域*/
 .layui-layout-admin .layui-header {
@@ -260,6 +261,12 @@ i {
     padding: 0;
 }
 /*左侧导航区域*/
+.layui-layout-admin .layui-side{
+    position: absolute;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+}
 .layui-nav-tree .layui-nav-item,
 .layui-layout-admin .layui-side {
     background: #fff;
