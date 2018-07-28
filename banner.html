@@ -47,6 +47,38 @@
                 <table id="tableBox" lay-filter="tableBox"></table>
             </div>
         </div>
+        <div class="mask  mask-psw">
+            <div class="mask-bg"></div>
+            <div class="mask-container">
+                <h2>修改密码
+                <i class="btn-x closeMask"></i>
+                </h2>
+                <form class="layui-form ">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">原密码：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="sourcePassword" required lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">新密码：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="modifiedPassword" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item ">
+                        <label class="layui-form-label">重复密码：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="modifiedPasswordTwo" required lay-verify="required" placeholder="请再次输入新密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="mask-btn-box">
+                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="pswBtn">修改密码</button>
+                        <div class="layui-btn layui-btn-primary closeMask">取消</div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="mask  mask-benner">
             <div class="mask-bg"></div>
             <div class="mask-container">
@@ -63,8 +95,8 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label"><i class="required">*</i>显示状态：</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="visible" value="0" title="隐藏">
                             <input type="radio" name="visible" value="1" title="显示" checked>
+                            <input type="radio" name="visible" value="0" title="隐藏">
                         </div>
                     </div>
                     <div class="layui-form-item layui-form-text">
@@ -86,6 +118,7 @@
                         </div>
                     </div>
                     <div class="layui-upload">
+                        <i class="required" style="float: left;">*</i>
                         <button type="button" class="layui-btn uploadBtn"><i class="layui-icon"></i>上传图片</button>
                         <div class="layui-upload-list">
                             <img class="layui-upload-img uploadImg">
@@ -122,8 +155,8 @@
                         <label class="layui-form-label"><i class="required">*</i>显示状态：</label>
                         <div class="layui-input-block">
                             <!-- checked -->
+                            <input type="radio" name="visible" value="1" title="显示" checked>
                             <input type="radio" name="visible" value="0" title="隐藏">
-                            <input type="radio" name="visible" value="1" title="显示">
                         </div>
                     </div>
                     <div class="layui-form-item layui-form-text">
@@ -145,6 +178,7 @@
                         </div>
                     </div>
                     <div class="layui-upload">
+                        <i class="required" style="float: left;">*</i>
                         <button type="button" class="layui-btn uploadBtn-edit"><i class="layui-icon"></i>上传图片</button>
                         <div class="layui-upload-list">
                             <img class="layui-upload-img uploadImg-edit">
@@ -173,7 +207,7 @@
         // 表格
         var tableIns = table.render({
             elem: "#tableBox",
-            url: 'http://10.10.67.5:9902/seoInformation/banner/listByPage',
+            url: ajaxUrl + '/banner/listByPage',
             cols: [
                 [ //表头
                     { field: 'id', title: '序号', sort: true },
@@ -224,15 +258,15 @@
                 $('.mask-banner-edit').find('input[name$="summary"]').val(data.summary);
                 $('.mask-banner-edit').find('.uploadImg-edit').attr('src', data.pictureUrl);
                 // 单选
-                $('.mask-banner-edit').find('input[name$="visible"]')[data.visible].checked = 'checked';
-                $('.mask-banner-edit').find(".layui-form-radio").eq(data.visible).addClass("layui-form-radioed").siblings(".layui-form-radio").removeClass("layui-form-radioed");
+                // $('.mask-banner-edit').find('input[name$="visible"]')[data.visible].checked = 'checked';
+                // $('.mask-banner-edit').find(".layui-form-radio").eq(data.visible).addClass("layui-form-radioed").siblings(".layui-form-radio").removeClass("layui-form-radioed");
             }
         });
         // ----------编辑项目
         // 图片上传
         var uploadInstEdit = upload.render({
             elem: '.uploadBtn-edit',
-            url: 'http://10.10.67.5:9902/seoInformation/banner/uploadImg',
+            url: ajaxUrl + '/banner/uploadImg',
             field: 'file',
             before: function(obj) {
                 //预读本地文件示例，不支持ie8
@@ -266,7 +300,7 @@
         // 图片上传
         var uploadInst = upload.render({
             elem: '.uploadBtn',
-            url: 'http://10.10.67.5:9902/seoInformation/banner/uploadImg',
+            url: ajaxUrl + '/banner/uploadImg',
             field: 'file',
             before: function(obj) {
                 //预读本地文件示例，不支持ie8
@@ -294,6 +328,11 @@
         // 提交
         form.on('submit(bannerBtn)', function(data) {
             ajaxBox(data.field, "/banner/create", "banner.html")
+            return false;
+        });
+        // 修改密码
+        form.on('submit(pswBtn)', function(data) {
+            ajaxBox(data.field, "/api/account/modifyPassword", "index.html")
             return false;
         });
     });

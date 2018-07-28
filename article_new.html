@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="jslib/layui/css/layui.css">
     <link rel="stylesheet" href="css/main.css">
     <title>贷财行SEO资讯管理后台系统</title>
 </head>
+
 <body class="layui-layout-body container">
     <div class="layui-layout layui-layout-admin">
         <!-- 头部区域 -->
@@ -54,17 +56,15 @@
                     <div class="layui-form-item fl-33 ">
                         <label class="layui-form-label "><i class="required">*</i>所属栏目：</label>
                         <div class="layui-input-block">
-                            <select name="columnId" lay-filter="aihao">
-                                <option value="1019411003000885249" selected="">栏目1</option>
-                                <option value="1">栏目2</option>
+                            <select name="columnId" lay-filter="aihao" class="column-select">
                             </select>
                         </div>
                     </div>
                     <div class="layui-form-item fl-33 cl-b">
                         <label class="layui-form-label "><i class="required">*</i>是否推荐：</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="recommend" value="0" title="否">
-                            <input type="radio" name="recommend" value="1" title="是" checked="">
+                            <input type="radio" name="recommend" value="1" title="是">
+                            <input type="radio" name="recommend" value="0" title="否" checked="">
                         </div>
                     </div>
                     <div class="layui-form-item fl-33 ">
@@ -73,7 +73,7 @@
                             <input type="text" name="readingNum" placeholder="请输入" autocomplete="off" class="layui-input">
                         </div>
                     </div>
-                    <div class="layui-form-item fl-33  ">
+                    <div class="layui-form-item fl-33  hide">
                         <label class="layui-form-label ">相关文章：</label>
                         <div class="layui-input-block">
                             <select name="relateArticleIds" lay-filter="aihao">
@@ -82,7 +82,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="layui-form-item fl-33 ">
+                    <div class="layui-form-item fl-33  cl-b">
                         <label class="layui-form-label ">标题：</label>
                         <div class="layui-input-block">
                             <input type="text" name="title" value="" placeholder="请输入" autocomplete="off" class="layui-input">
@@ -115,17 +115,62 @@
                     <div class="article-new-content">
                         <div class="layui-form">
                             <button class="layui-btn layui-btn-normal" lay-submit lay-filter="articleBtn">提交</button>
+                            <div class="layui-btn layui-btn-warm preview">预览</div>
                             <div class="layui-btn layui-btn-primary goBack">返回</div>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
+        <div class="mask  mask-psw">
+            <div class="mask-bg"></div>
+            <div class="mask-container">
+                <h2>修改密码
+                <i class="btn-x closeMask"></i>
+                </h2>
+                <form class="layui-form ">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">原密码：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="sourcePassword" required lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">新密码：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="modifiedPassword" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item ">
+                        <label class="layui-form-label">重复密码：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="modifiedPasswordTwo" required lay-verify="required" placeholder="请再次输入新密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="mask-btn-box">
+                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="pswBtn">修改密码</button>
+                        <div class="layui-btn layui-btn-primary closeMask">取消</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="mask mask-preview" >
+            <div class="mask-bg"></div>
+            <div class="mask-container">
+                <h2><span>文章预览</span>
+                <i class="btn-x closeMask"></i>
+                </h2>
+                <div class="preview-content"></div>
+            </div>
+        </div>
+    </div>
     </div>
     <script src="jslib/jquery/jquery.min.js"></script>
     <script src="jslib/layui/layui.js"></script>
     <script src="js/main.js"></script>
     <script>
+    // 所属项目-下拉列表
+    columnSelect()
     layui.use(['element', 'laypage', 'layer', 'layedit', 'form'], function() {
         var element = layui.element,
             laypage = layui.laypage,
@@ -136,7 +181,7 @@
         // 图片上传接口
         layedit.set({
             uploadImage: {
-                url: 'http://10.10.67.5:9902/seoInformation/article/uploadImg',
+                url: ajaxUrl + '/article/uploadImg',
                 type: 'post' //默认post
             }
         });
@@ -162,6 +207,7 @@
                 return layedit.sync(index);
             }
         })
+
         // 提交
         form.on('submit(articleBtn)', function(data) {
             // data.field - 当前容器的全部表单字段，名值对形式：{name: value}
@@ -172,7 +218,28 @@
             }
             return false;
         });
+        // 预览
+        form.on('submit(preview)', function(data) {
+            // data.field - 当前容器的全部表单字段，名值对形式：{name: value}
+            console.log(data.field)
+            return false;
+        });
+        $(".preview").click(function() {
+            var editContent = layedit.getContent(index)
+            if(editContent){
+                $(".mask-preview").show()
+                $(".preview-content").html(layedit.getContent(index))
+            }else{
+                layer.msg('文章内容不得为空', { icon: 5, anim: 6 });
+            }
+        })
+        // 修改密码
+        form.on('submit(pswBtn)', function(data) {
+            ajaxBox(data.field, "/api/account/modifyPassword", "index.html")
+            return false;
+        });
     });
     </script>
 </body>
+
 </html>

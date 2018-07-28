@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="jslib/layui/css/layui.css">
     <link rel="stylesheet" href="css/main.css">
     <title>贷财行SEO资讯管理后台系统</title>
 </head>
+
 <body class="layui-layout-body container">
     <div class="layui-layout layui-layout-admin">
         <!-- 头部区域 -->
@@ -57,6 +59,38 @@
             </div>
             <div class="content tag-content">
                 <table id="tableBox" lay-filter="tableBox"></table>
+            </div>
+        </div>
+         <div class="mask  mask-psw">
+            <div class="mask-bg"></div>
+            <div class="mask-container">
+                <h2>修改密码
+                <i class="btn-x closeMask"></i>
+                </h2>
+                <form class="layui-form ">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">原密码：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="sourcePassword" required lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">新密码：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="modifiedPassword" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item ">
+                        <label class="layui-form-label">重复密码：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="modifiedPasswordTwo" required lay-verify="required" placeholder="请再次输入新密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="mask-btn-box">
+                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="pswBtn">修改密码</button>
+                        <div class="layui-btn layui-btn-primary closeMask">取消</div>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="mask  mask-tag">
@@ -155,7 +189,7 @@
         // 表格
         var tableIns = table.render({
             elem: "#tableBox",
-            url: 'http://10.10.67.5:9902/seoInformation/tag/listByPage',
+            url: ajaxUrl + '/tag/listByPage',
             cols: [
                 [ //表头
                     { field: 'id', title: '序号', sort: true },
@@ -210,40 +244,35 @@
             ajaxBox(data.field, "/tag/create", "tag.html")
             return false;
         });
-        // ----------搜索-重置项目        无效
+        // ----------搜索-重置项目    
         // 搜索
         $(".search-btn").on("click", function() {
             tableIns.reload({
                 // 设定后台交互的参数
-                url:'http://10.10.67.5:9902/seoInformation/tag/view',
                 where: {
-                    id: $(".search-input").val(),
+                    name: $(".search-input").val(),
                 },
                 page: {
                     curr: 1 //重新从第 1 页开始
-                },
-                done:function(msg){
-                    if (!msg.code==0) {
-                        layer.alert(msg.msg, { icon: 5 },function(){
-                            tableIns.reload({
-                                url:'http://10.10.67.5:9902/seoInformation/tag/listByPage',
-                                page: {
-                                    curr: 1 //重新从第 1 页开始
-                                }
-                            });
-                        });
-                    }
                 }
             });
         })
         // 重置
         $(".reset-btn").on("click", function() {
             tableIns.reload({
+                 where: {
+                    name:'',
+                },
                 page: {
-                    curr: 1 //重新从第 1 页开始
+                    curr: 1 
                 }
             });
         })
+        // 修改密码
+        form.on('submit(pswBtn)', function(data) {
+            ajaxBox(data.field, "/api/account/modifyPassword", "index.html")
+            return false;
+        });
     });
     </script>
     <!-- 工具条 -->
@@ -252,4 +281,5 @@
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
 </body>
+
 </html>

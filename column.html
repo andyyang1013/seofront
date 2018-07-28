@@ -69,8 +69,8 @@
                     <div class="layui-form-item fl-50">
                         <label class="layui-form-label"><i class="required">*</i>导航显示：</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="visible" value="0" title="隐藏">
                             <input type="radio" name="visible" value="1" title="显示" checked>
+                            <input type="radio" name="visible" value="0" title="隐藏">
                         </div>
                     </div>
                     <div class="layui-form-item fl-50">
@@ -98,6 +98,7 @@
                         </div>
                     </div>
                     <div class="layui-upload">
+                        <i class="required" style="float: left;">*</i>
                         <button type="button" class="layui-btn uploadBtn"><i class="layui-icon"></i>上传图片</button>
                         <div class="layui-upload-list">
                             <img class="layui-upload-img uploadImg">
@@ -106,6 +107,38 @@
                     </div>
                     <div class="mask-btn-box">
                         <button class="layui-btn layui-btn-normal" lay-submit lay-filter="columnBtn">确定</button>
+                        <div class="layui-btn layui-btn-primary closeMask">取消</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+         <div class="mask  mask-psw">
+            <div class="mask-bg"></div>
+            <div class="mask-container">
+                <h2>修改密码
+                <i class="btn-x closeMask"></i>
+                </h2>
+                <form class="layui-form ">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">原密码：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="sourcePassword" required lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">新密码：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="modifiedPassword" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item ">
+                        <label class="layui-form-label">重复密码：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="modifiedPasswordTwo" required lay-verify="required" placeholder="请再次输入新密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="mask-btn-box">
+                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="pswBtn">修改密码</button>
                         <div class="layui-btn layui-btn-primary closeMask">取消</div>
                     </div>
                 </form>
@@ -139,8 +172,8 @@
                     <div class="layui-form-item fl-50">
                         <label class="layui-form-label"><i class="required">*</i>导航显示：</label>
                         <div class="layui-input-block">
+                            <input type="radio" name="visible" value="1" title="显示" checked>
                             <input type="radio" name="visible" value="0" title="隐藏">
-                            <input type="radio" name="visible" value="1" title="显示">
                         </div>
                     </div>
                     <div class="layui-form-item fl-50">
@@ -168,6 +201,7 @@
                         </div>
                     </div>
                     <div class="layui-upload">
+                        <i class="required" style="float: left;">*</i>
                         <button type="button" class="layui-btn uploadBtn-edit"><i class="layui-icon"></i>上传图片</button>
                         <div class="layui-upload-list">
                             <img class="layui-upload-img uploadImg-edit">
@@ -196,7 +230,7 @@
         // 表格
         var tableIns = table.render({
             elem: "#tableBox",
-            url: 'http://10.10.67.5:9902/seoInformation/column/listByPage',
+            url: ajaxUrl + '/column/listByPage',
             cols: [
                 [ //表头
                     { field: 'id', title: '序号', sort: true },
@@ -247,10 +281,11 @@
                 $('.mask-column-edit').find('input[name$="title"]').val(data.title);
                 $('.mask-column-edit').find('input[name$="keyword"]').val(data.keyword);
                 $('.mask-column-edit').find('input[name$="desc"]').val(data.desc);
+                $('.mask-column-edit').find('input[name$="pictureUrl"]').val(data.pictureUrl);
                 $('.mask-column-edit').find('.uploadImg-edit').attr('src', data.pictureUrl);
                 // 单选
-                $('.mask-column-edit').find('input[name$="visible"]')[data.visible].checked = 'checked';
-                $('.mask-column-edit').find(".layui-form-radio").eq(data.visible).addClass("layui-form-radioed").siblings(".layui-form-radio").removeClass("layui-form-radioed");
+                // $('.mask-column-edit').find('input[name$="visible"]')[data.visible].checked = 'checked';
+                // $('.mask-column-edit').find(".layui-form-radio").eq(data.visible).addClass("layui-form-radioed").siblings(".layui-form-radio").removeClass("layui-form-radioed");
                 //同步更新缓存对应的值
                 // obj.update({
                 //     username: '123',
@@ -262,7 +297,7 @@
         // 图片上传
         var uploadInstEdit = upload.render({
             elem: '.uploadBtn-edit',
-            url: 'http://10.10.67.5:9902/seoInformation/column/uploadImg',
+            url: ajaxUrl + '/column/uploadImg',
             field: 'file',
             before: function(obj) {
                 //预读本地文件示例，不支持ie8
@@ -289,14 +324,14 @@
         });
         // 提交
         form.on('submit(columnBtn-edit)', function(data) {
-            ajaxBox(data.field, "/column/create", "column.html")
+            ajaxBox(data.field, "/column/modify", "column.html")
             return false;
         });
         // ----------新增项目
         // 图片上传
         var uploadInst = upload.render({
             elem: '.uploadBtn',
-            url: 'http://10.10.67.5:9902/seoInformation/column/uploadImg',
+            url: ajaxUrl + '/column/uploadImg',
             field: 'file',
             before: function(obj) {
                 //预读本地文件示例，不支持ie8
@@ -324,6 +359,11 @@
         // 提交
         form.on('submit(columnBtn)', function(data) {
             ajaxBox(data.field, "/column/create", "column.html")
+            return false;
+        });
+        // 修改密码
+        form.on('submit(pswBtn)', function(data) {
+            ajaxBox(data.field, "/api/account/modifyPassword", "index.html")
             return false;
         });
     });

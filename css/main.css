@@ -125,7 +125,7 @@ i {
     left: 0;
     box-sizing: border-box;
 }
-.layui-form-item.fl-50{
+.layui-form-item.fl-50 {
     float: left;
     width: 50%;
     clear: none;
@@ -140,24 +140,28 @@ i {
     background-size: 15px;
     margin-top: 10px;
 }
-.cl-b{
+.cl-b {
     clear: both !important;
 }
-.required{
+.required {
     color: red;
     font-size: 15px;
     margin-right: 2px;
     vertical-align: sub;
 }
-.layui-form-label{
+.layui-form-label {
     height: 20px;
     overflow: hidden;
 }
-.layui-table-page>div{
-    text-align: center;         
+.layui-table-page>div {
+    text-align: center;
 }
-.layui-table, .layui-table-view {
-    margin:0;
+.layui-table,
+.layui-table-view {
+    margin: 0;
+}
+.mask .layui-btn:hover{
+    opacity: 1;
 }
 /*------------------------------公共 End------------------------------*/
 .login-bg {
@@ -245,6 +249,8 @@ i {
     position: relative;
     left: 0;
     display: inline-block;
+    cursor: default;
+
 }
 .layui-layout-admin .layui-logo-sub {
     font-size: 14px;
@@ -362,21 +368,21 @@ i {
 #listPage {
     text-align: center;
     margin-top: 15px;
-    
 }
 /*上传图片*/
-.layui-upload{
+.layui-upload {
     min-height: 35px;
 }
 .uploadBtn,
 .uploadBtn-edit {
     display: block;
     padding: 10px 8px;
-    margin:0 10px;
+    margin: 0 10px 0 0;
     float: left;
     line-height: 15px;
 }
-.layui-code, .layui-upload-list{
+.layui-code,
+.layui-upload-list {
     margin: 0;
     overflow: hidden;
 }
@@ -500,10 +506,8 @@ i {
 .column-list>li>div:nth-child(8) {
     width: 70px;
 }
-
 /*——————————文章管理*/
-
-.search-form{
+.search-form {
     padding: 15px 0 20px;
     /*overflow: hidden;*/
     clear: both;
@@ -511,71 +515,117 @@ i {
 .search-form .layui-form-item {
     /*display: inline-block;*/
     margin: 0 20px 15px 0;
-    clear: none;   
+    clear: none;
 }
-.search-form .layui-form-item label{
+.search-form .layui-form-item label {
     width: auto;
     padding: 0;
     height: 35px;
-    line-height: 35px;    
+    line-height: 35px;
     margin-right: 15px;
 }
-.search-form .layui-form-item .layui-input-block{
+.search-form .layui-form-item .layui-input-block {
     height: 35px;
     min-height: 35px;
-    line-height: 35px; 
-    margin: 0;  
+    line-height: 35px;
+    margin: 0;
     float: left;
 }
-.search-form .layui-form-item .layui-input-block input{
-     height: 35px;
-    line-height: 35px;   
+.search-form .layui-form-item .layui-input-block input {
+    height: 35px;
+    line-height: 35px;
 }
-.search-form .layui-form-item .layui-btn{
+.search-form .layui-form-item .layui-btn {
     float: left;
 }
-
-.article-content{
+.article-content {
     clear: both;
 }
 .article-body .search-form .layui-form-item {
     margin-right: 25px;
     float: left;
 }
-
 /*新增文章*/
-.fl-33{
+.fl-33 {
     float: left;
     width: 33.33%;
     margin: 0 0 20px!important;
 }
-.article-new-body  .layui-input-block{
+.article-new-body .layui-input-block {
     padding-right: 30px;
 }
-.article-new-body .layui-form-item label{
+.article-new-body .layui-form-item label {
     width: 80px;
 }
-.article-new-body .layui-form-item .layui-input-block{
+.article-new-body .layui-form-item .layui-input-block {
+    width: 200px;
+}
+/*修改*/
+.mask-article-edit {
+    width: 100%;
+    height: 100%;
+    min-width: 1300px;
+    position: absolute;
+}
+.mask-article-edit .mask-container {
+    width: 1000px;
+    height: 561px;
+    box-sizing: border-box;    margin-top: -50px;
+}
+.mask-article-edit .layui-form {
+    box-sizing: border-box;
+    height: 500px;
+    padding: 0;
+}
+.mask-article-edit .layui-form .article-edit-content{
+    height: 445px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    padding: 30px ;
+}
+.mask-article-edit .layui-form .layui-form-item {
+    clear: none;
+}
+.mask-article-edit .layui-form-item .fl-33 {
+    margin-bottom: 15px !important;
+}
+.mask-article-edit .layui-form-item label {
+    width: 80px;
+}
+.mask-article-edit .layui-form-item .layui-input-block {
+    padding-right: 30px;
     width: 200px;
 }
 /*富文本*/
-.article-new-content-t{
+.article-new-content-t {
     height: 35px;
     line-height: 35px;
     width: 80px;
     text-align: right;
     margin-bottom: 10px;
 }
-.ueditor-container{
+.ueditor-container {
     width: 100%;
     margin-bottom: 30px;
 }
 /*提交*/
-.article-new-content .layui-form{
+.article-new-content .layui-form {
     text-align: center;
 }
-.article-new-content .layui-form .layui-btn{
+.article-new-content .layui-form .layui-btn {
     width: 100px;
+}
+/*预览*/
+.mask-preview .mask-container{
+    width: 1000px;
+    height: 561px;
+    box-sizing: border-box;
+}
+.mask-preview .mask-container .preview-content{
+    height: 500px;
+    overflow-y: auto;
+    padding: 15px;
+    box-sizing: border-box;
 }
 /*文章列表*/
 .article-list .list-title>span,
@@ -622,13 +672,13 @@ i {
 .article-list>li>div:nth-child(11) {
     width: 120px;
 }
-.article-list.list>li>div>a{
+.article-list.list>li>div>a {
     margin-right: 15px;
 }
 /*——————————标签管理*/
 .tag-body .layui-body-title,
 .article-body .layui-body-title,
-.article-new-body .layui-body-title{
+.article-new-body .layui-body-title {
     border-bottom: 0;
 }
 .tag-body .search-form .layui-form-item {

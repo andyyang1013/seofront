@@ -15,7 +15,7 @@
             <ul class="layui-nav layui-layout-right">
                 <li class="layui-nav-item">
                     <a href="javascript:;">
-                        管理员：<span>名字</span>
+                        管理员：<span class="admin-name">名字</span>
                     </a>
                 </li>
                 <li class="layui-nav-item"><a href="javascript:;" onclick="$('.mask-psw').show()">修改密码</a></li>
@@ -45,15 +45,15 @@
             <div class="search-form">
                 <div class="layui-form ">
                     <div class="layui-form-item  ">
-                        <label class="layui-form-label ">文章名称：</label>
+                        <label class="layui-form-label ">名称：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="name" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input search-input-name">
                         </div>
                     </div>
                     <div class="layui-form-item  ">
-                        <label class="layui-form-label ">标题：</label>
+                        <label class="layui-form-label ">标签：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="tags" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input search-input-tags">
                         </div>
                     </div>
                     <!--  <div class="layui-form-item  ">
@@ -62,7 +62,7 @@
                             <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                         </div>
                     </div> -->
-                    <button class="layui-btn layui-btn-normal">搜索</button>
+                    <button class="layui-btn layui-btn-normal search-btn">搜索</button>
                     <button class="layui-btn reset-btn">重置</button>
                     <button class="layui-btn layui-btn-danger fl-r" onclick="location.href='article_new.html'">+ 新增</button>
                 </div>
@@ -71,24 +71,172 @@
                 <table id="tableBox" lay-filter="tableBox"></table>
             </div>
         </div>
+        <div class="mask  mask-psw">
+            <div class="mask-bg"></div>
+            <div class="mask-container">
+                <h2>修改密码
+                <i class="btn-x closeMask"></i>
+                </h2>
+                <form class="layui-form ">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">原密码：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="sourcePassword" required lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">新密码：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="modifiedPassword" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item ">
+                        <label class="layui-form-label">重复密码：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="modifiedPasswordTwo" required lay-verify="required" placeholder="请再次输入新密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="mask-btn-box">
+                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="pswBtn">修改密码</button>
+                        <div class="layui-btn layui-btn-primary closeMask">取消</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="mask  mask-article-edit">
+            <div class="mask-bg"></div>
+            <div class="mask-container">
+                <h2><span>修改栏目</span>
+                <i class="btn-x closeMask"></i>
+                </h2>
+                <form class="layui-form">
+                    <div class="article-edit-content">
+                    <div class="layui-upload hide">
+                        <label class="layui-form-label">id：</label>
+                        <div class="layui-upload-list">
+                            <input type="text" name="id" placeholder="请输入id" autocomplete="off" class="layui-input ">
+                        </div>
+                    </div>
+                    <div class="layui-form-item fl-33 ">
+                        <label class="layui-form-label "><i class="required">*</i>文章名称：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="name" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item fl-33 ">
+                        <label class="layui-form-label "><i class="required">*</i>所属栏目：</label>
+                        <div class="layui-input-block">
+                            <select name="columnId" lay-filter="aihao" class="column-select">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item fl-33 cl-b">
+                        <label class="layui-form-label "><i class="required">*</i>是否推荐：</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="recommend" value="1" title="是" >
+                            <input type="radio" name="recommend" value="0" title="否" checked="">
+                        </div>
+                    </div>
+                    <div class="layui-form-item fl-33 ">
+                        <label class="layui-form-label ">阅读数：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="readingNum" placeholder="请输入" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item fl-33  hide">
+                        <label class="layui-form-label ">相关文章：</label>
+                        <div class="layui-input-block">
+                            <select name="relateArticleIds" lay-filter="aihao">
+                                <option value="0" selected="">栏目1</option>
+                                <option value="1">栏目2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item fl-33 cl-b">
+                        <label class="layui-form-label ">标题：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" value="" placeholder="请输入" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item fl-33 ">
+                        <label class="layui-form-label ">关键词：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="keyword" placeholder="请输入" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item fl-33 ">
+                        <label class="layui-form-label ">描述：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="desc" placeholder="请输入" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item cl-b">
+                        <label class="layui-form-label ">文章标签：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="tags" placeholder="请输入" autocomplete="off" class="layui-input" style="width: 550px">
+                        </div>
+                    </div>
+                    <div class="content article-new-content">
+                        <p class="article-new-content-t"><i class="required">*</i>文章内容：</p>
+                        <div class="ueditor-container" id="editorContainer">
+                            <textarea id="layedit" name="content" required lay-verify="content" style="display: none;"></textarea>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="mask-btn-box">
+                        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="articleEditBtn">确定</button>
+                        <div class="layui-btn layui-btn-primary closeMask">取消</div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <script src="jslib/jquery/jquery.min.js"></script>
     <script src="jslib/layui/layui.js"></script>
     <script src="js/main.js"></script>
     <script>
-    layui.use(['element', 'table', 'layer', 'form'], function() {
+    // 所属项目-下拉列表
+    columnSelect()
+    layui.use(['element', 'table', 'layer', 'layedit', 'form'], function() {
         var element = layui.element,
             table = layui.table,
             layer = layui.layer,
             form = layui.form,
+            layedit = layui.layedit,
             $ = layui.jquery;
-        // 表格
+        // ————————富文本
+        // 图片上传接口
+        layedit.set({
+            uploadImage: {
+                url: ajaxUrl + '/article/uploadImg',
+                type: 'post' //默认post
+            }
+        });
+        // //构建编辑器
+        // var index = layedit.build('layedit', {
+        //     tool: [
+        //         'strong' //加粗
+        //         , 'italic' //斜体
+        //         , 'underline' //下划线
+        //         , 'del' //删除线
+        //         , '|' //分割线
+        //         , 'left' //左对齐
+        //         , 'center' //居中对齐
+        //         , 'right' //右对齐
+        //         , 'link' //超链接
+        //         , 'unlink' //清除链接
+        //         , 'image' //插入图片
+        //     ],
+        //     height:100
+        // });
+        
+        // ————————表格
         var tableIns = table.render({
             elem: "#tableBox",
-            url: 'http://10.10.67.5:9902/seoInformation/article/listByPage',
+            url: ajaxUrl + '/article/listByPage',
             cols: [
                 [ //表头
-                    { field: 'index', title: '序号', sort: true },
+                    { field: 'index',title: '序号', sort: true },
                     { field: 'name', title: '文章名称' },
                     { field: 'column', title: '所属栏目' },
                     { field: 'tags', title: '文章标签' },
@@ -148,17 +296,82 @@
                     layer.close(index);
                 });
             } else if (layEvent === 'edit') { //编辑
+                $('.mask-article-edit').show();
+                $("#layedit").html(data.content);
+                //构建编辑器
+                var index = layedit.build('layedit', {
+                    tool: [
+                        'strong' //加粗
+                        , 'italic' //斜体
+                        , 'underline' //下划线
+                        , 'del' //删除线
+                        , '|' //分割线
+                        , 'left' //左对齐
+                        , 'center' //居中对齐
+                        , 'right' //右对齐
+                        , 'link' //超链接
+                        , 'unlink' //清除链接
+                        , 'image' //插入图片
+                    ],
+                    height: 300
+                });
+                // 同步编辑器内容到textarea
+                form.verify({
+                    content: function(value) {
+                        return layedit.sync(index);
+                    }
+                })
+                // 提交
+                form.on('submit(articleEditBtn)', function(data) {
+                    // data.field - 当前容器的全部表单字段，名值对形式：{name: value}
+                    if (data.field.content) {
+                        ajaxBox(data.field, "/article/modify", "article.html")
+                    } else {
+                        layer.msg('文章内容不得为空', { icon: 5, anim: 6 });
+                    }1
+                    return false;
+                });
+                $('.mask-article-edit').find('input[name$="id"]').val(data.id);
+                $('.mask-article-edit').find('input[name$="name"]').val(data.name);
+                $('.mask-article-edit').find('input[name$="readingNum"]').val(data.readingNum);
+                $('.mask-article-edit').find('input[name$="title"]').val(data.title);
+                $('.mask-article-edit').find('input[name$="keyword"]').val(data.keyword);
+                $('.mask-article-edit').find('input[name$="desc"]').val(data.desc);
+                $('.mask-article-edit').find('input[name$="tags"]').val(data.tags);
+                $('.mask-article-edit').find('input[name$="recommend"]').val(data.recommend);
             }
         });
+        // ----------搜索-重置项目    
         // 搜索
-        // 重置
-        $(".reset-btn").on("click", function() {
+        $(".search-btn").on("click", function() {
             tableIns.reload({
+                // 设定后台交互的参数
+                where: {
+                    name: $(".search-input-name").val(),
+                    tags: $(".search-input-tags").val()
+                },
                 page: {
                     curr: 1 //重新从第 1 页开始
                 }
             });
         })
+        // 重置
+        $(".reset-btn").on("click", function() {
+            tableIns.reload({
+                where: {
+                    name: '',
+                    tags: ''
+                },
+                page: {
+                    curr: 1
+                }
+            });
+        })
+        // 修改密码
+        form.on('submit(pswBtn)', function(data) {
+            ajaxBox(data.field, "/api/account/modifyPassword", "index.html")
+            return false;
+        });
     });
     </script>
     <!-- 工具条 -->
