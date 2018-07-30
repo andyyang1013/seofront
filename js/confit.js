@@ -1,0 +1,1 @@
+var ajaxUrl = "http://120.25.246.51:8003/news"
