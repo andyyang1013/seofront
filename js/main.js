@@ -6,7 +6,7 @@ $(".closeMask").click(function() {
 $(".goBack").click(function() {
     window.history.back();
 });
-var ajaxUrl = "http://10.10.67.5:9902/seoInformation"
+
 // 操作：新增-删除-上下架-修改-
 function ajaxBox(data, interface, backUrl) {
     $.ajax({
