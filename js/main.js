@@ -1,3 +1,12 @@
+//设置cookie
+function setCookie(key,value,expires){
+    document.cookie=encodeURIComponent(key)+'='+encodeURIComponent(value)+';expires='+ddate(expires);
+  }
+    function ddate(expires){
+      var ddate=new Date()
+        ddate.setDate(ddate.getDate()+expires)
+        return ddate
+    }
 //读取cookie
 function getCookie(name){
   var arrStr=document.cookie.split('; ');
@@ -9,11 +18,9 @@ function getCookie(name){
   }
  return ''
 }
-
 var token = getCookie('token');
-
 var ajaxHead = {
-                "HTTP_TOKEN":token,
+                "HTTP_TOKEN":token
                 }
 // 关遮罩
 $(".closeMask").click(function() {
@@ -23,7 +30,7 @@ $(".closeMask").click(function() {
 $(".goBack").click(function() {
     window.history.back();
 });
-
+// var apiKey = {apiKey:"e1a2c53d16666ece99cd63f669350e5e"}
 // 操作：新增-删除-上下架-修改-
 function ajaxBox(data, interface, backUrl) {
     $.ajax({
@@ -31,7 +38,7 @@ function ajaxBox(data, interface, backUrl) {
         headers:ajaxHead,
         dataType: "json",
         url: ajaxUrl + interface,
-        data: data,
+        data: data + apiKey,
         success: function(msg) {
             if (msg.code == '0') {
                 layer.alert('操作成功', { icon: 6 }, function() {
@@ -51,6 +58,7 @@ function ajaxBox(data, interface, backUrl) {
 function channel() {
     $.ajax({
         type: 'GET',
+        headers:ajaxHead,
         dataType: "json",
         url: ajaxUrl + '/channel/listByPage',
         success: function(msg) {
@@ -73,7 +81,9 @@ function channel() {
 function columnSelect() {
     $.ajax({
         type: 'POST',
-        data: { pageSize: '99' },
+        headers:ajaxHead,
+        data: { 
+            pageSize: '99' },
         dataType: "json",
         url: ajaxUrl + '/column/listByPage',
         success: function(msg) {
@@ -87,23 +97,26 @@ function columnSelect() {
 }
 // 登录
 function login(){
+    var psw = hex_md5($("#password").val())
     $.ajax({
         type: 'POST',
+        headers:ajaxHead,
         data: {
             account:$("#admin").val(),
-            password:$("#password").val(),
+            password:psw,
         },
         dataType: "json",
         url: ajaxUrl + '/api/login',
         success: function(msg) {
              if (msg.code == '0') {
-                window.location.href = index.html
+                window.location.href = "index.html"
             } else {
                 $(".error-tips").html(msg.msg);
             }
         }
     });
 }
+
 // function ajaxYN(interface, backUrl, idNum) {
 //     layer.open({
 //         type: 1,
@@ -137,5 +150,3 @@ function login(){
 //         }
 //     })
 // }
-
-
