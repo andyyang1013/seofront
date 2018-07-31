@@ -1,1 +1,1 @@
-var ajaxUrl = "http://120.25.246.51:8003/news"
+var ajaxUrl = "http://120.25.246.51:8003/news/api"
