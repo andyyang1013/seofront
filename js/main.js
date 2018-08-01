@@ -109,6 +109,7 @@ function login(){
         url: ajaxUrl + '/login',
         success: function(msg) {
              if (msg.code == '0') {
+                setCookie('token',msg.data,2)
                 window.location.href = "index.html"
             } else {
                 $(".error-tips").html(msg.msg);
