@@ -14,7 +14,7 @@ function ajaxBox(data, interface, backUrl) {
         headers:ajaxHead,
         dataType: "json",
         url: ajaxUrl + interface,
-        data: data + apiKey,
+        data: data,
         success: function(msg) {
             if (msg.code == '0') {
                 layer.alert('操作成功', { icon: 6 }, function() {
