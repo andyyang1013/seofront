@@ -18,9 +18,9 @@ function getCookie(name){
   }
  return ''
 }
-var token = getCookie('token');
+var tokenNum = getCookie('token');
 var ajaxHead = {
-                "HTTP_TOKEN":token
+                "token":tokenNum
                 }
 // 关遮罩
 $(".closeMask").click(function() {
