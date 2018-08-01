@@ -20,7 +20,7 @@ function getCookie(name){
 }
 var tokenNum = getCookie('token');
 var ajaxHead = {
-                "token":tokenNum
+                "Token":tokenNum
                 }
 // 关遮罩
 $(".closeMask").click(function() {
