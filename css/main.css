@@ -588,6 +588,7 @@ i {
     max-height: 80%;
     box-sizing: border-box;
     margin-top: -50px;
+    overflow: auto;
 }
 .mask-article-edit .layui-form {
     box-sizing: border-box;
