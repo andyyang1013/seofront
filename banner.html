@@ -208,6 +208,7 @@
         // 表格
         var tableIns = table.render({
             elem: "#tableBox",
+            headers:ajaxHead,
             url: ajaxUrl + '/banner/listByPage',
             cols: [
                 [ //表头
@@ -268,6 +269,7 @@
         var uploadInstEdit = upload.render({
             elem: '.uploadBtn-edit',
             url: ajaxUrl + '/banner/uploadImg',
+            headers:ajaxHead,
             field: 'file',
             before: function(obj) {
                 //预读本地文件示例，不支持ie8
@@ -302,6 +304,7 @@
         var uploadInst = upload.render({
             elem: '.uploadBtn',
             url: ajaxUrl + '/banner/uploadImg',
+            headers:ajaxHead,
             field: 'file',
             before: function(obj) {
                 //预读本地文件示例，不支持ie8
