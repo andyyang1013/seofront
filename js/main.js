@@ -25,7 +25,7 @@ function ajaxBox(data, interface, backUrl) {
                     }
                 });
             } else {
-                layer.alert('操作失败，请重试', { icon: 5 });
+                layer.alert(msg.msg+"，请重试", { icon: 5 });
             }
         }
     });
@@ -48,7 +48,7 @@ function channel() {
                 $(".mask-pd-edit").find('input[name$="keyword"]').val(msg.data[0].keyword)
                 $(".mask-pd-edit").find('textarea[name$="desc"]').val(msg.data[0].desc)
             } else {
-                layer.msg('数据异常，请重试', { icon: 5 });
+                layer.msg(msg.msg+"，请重试", { icon: 5 });
             }
         }
     });
