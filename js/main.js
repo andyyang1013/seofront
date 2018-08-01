@@ -43,6 +43,7 @@ function ajaxBox(data, interface, backUrl) {
             if (msg.code == '0') {
                 layer.alert('操作成功', { icon: 6 }, function() {
                     if (backUrl) {
+                        debugger
                         window.location.href = backUrl
                     } else {
                         layer.closeAll();
