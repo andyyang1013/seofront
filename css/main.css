@@ -114,7 +114,7 @@ i {
     z-index: 9;
 }
 .mask-container .layui-form {
-    padding: 90px 30px 80px;
+    padding: 90px 60px 80px 30px;
     position: relative;
     overflow: hidden;
     box-sizing: border-box;
@@ -581,10 +581,11 @@ i {
     min-width: 1300px;
     position: absolute;
 }
+.mask-preview .mask-container,
 .mask-article-edit .mask-container {
     width: 1000px;
     height: auto;
-    max-height: 70%;
+    max-height: 80%;
     box-sizing: border-box;
     margin-top: -50px;
 }
@@ -598,7 +599,7 @@ i {
         height: 100%;
     box-sizing: border-box;
     overflow-y: auto;
-    padding: 30px;
+    padding: 30px 30px 55px 30px;
 }
 .mask-article-edit .layui-form .layui-form-item {
     clear: none;
@@ -633,16 +634,12 @@ i {
     width: 100px;
 }
 /*预览*/
-.mask-preview .mask-container{
-    width: 1000px;
-    height: 561px;
-    box-sizing: border-box;
-}
 .mask-preview .mask-container .preview-content{
     height: 500px;
     overflow-y: auto;
     padding: 15px;
     box-sizing: border-box;
+        padding: 90px 30px 30px 30px;
 }
 /*文章列表*/
 .article-list .list-title>span,
