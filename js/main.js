@@ -18,7 +18,7 @@ function getCookie(name){
   }
  return ''
 }
-var tokenNum = getCookie('token');
+
 var ajaxHead = {
                 "Token":tokenNum
                 }
