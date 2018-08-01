@@ -155,8 +155,9 @@
         // 频道标签
         // 表单监听
         form.on('submit(channelBtn)', function(data) {
-            ajaxBox(data.field, "/channel/modify", "index.html")
             alert(1)
+            ajaxBox(data.field, "/channel/modify", "index.html")
+            alert(2)
             return false;
         });
         // 修改密码
