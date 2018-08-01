@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="css/main.css">
     <title>贷财行SEO资讯管理后台系统</title>
     <script src="js/config_tpl.js"></script>
+    <style>
+        .layui-layedit-iframe iframe{
+            height: 600px;
+            min-height: 300px;
+        }
+    </style>
 </head>
 <body class="layui-layout-body container">
     <div class="layui-layout layui-layout-admin">
@@ -314,7 +320,7 @@
                         , 'unlink' //清除链接
                         , 'image' //插入图片
                     ],
-                    height: 300
+                    height: 500
                 });
                 // 同步编辑器内容到textarea
                 form.verify({
