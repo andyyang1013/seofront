@@ -106,7 +106,7 @@ function login(){
             password:psw,
         },
         dataType: "json",
-        url: ajaxUrl + '/api/login',
+        url: ajaxUrl + '/login',
         success: function(msg) {
              if (msg.code == '0') {
                 window.location.href = "index.html"
