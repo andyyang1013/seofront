@@ -170,8 +170,10 @@
     <script src="jslib/layui/layui.js"></script>
     <script src="js/main.js"></script>
     <script>
+    $(function(){
     // 所属项目-下拉列表
-    columnSelect()
+        columnSelect()
+    })
     layui.use(['element', 'laypage', 'layer', 'layedit', 'form'], function() {
         var element = layui.element,
             laypage = layui.laypage,
