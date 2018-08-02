@@ -112,6 +112,7 @@ i {
     width: 100%;
     box-sizing: border-box;
     z-index: 9;
+    color:#fff;
 }
 .mask-container .layui-form {
     padding: 90px 60px 80px 30px;
