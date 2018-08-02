@@ -171,7 +171,6 @@
     <script src="js/main.js"></script>
     <script>
     // 所属项目-下拉列表
-        columnSelect()
     layui.use(['element', 'laypage', 'layer', 'layedit', 'form'], function() {
         var element = layui.element,
             laypage = layui.laypage,
@@ -209,7 +208,26 @@
                 return layedit.sync(index);
             }
         })
-        form.render(null, 'test1');
+        columnSelect1()
+        function columnSelect1() {
+            $.ajax({
+                type: 'POST',
+                headers:ajaxHead,
+                data: { 
+                    pageSize: '99' },
+                dataType: "json",
+                url: ajaxUrl + '/column/listByPage',
+                success: function(msg) {
+                    var data = msg.data,x = '';
+                    for (var i = 0; i < data.length; i++) {
+                        x += "<option value='" + data[i].id + "'>" + data[i].name + "</option>";
+                    }
+                    console.log(x)
+                    $(".column-select").append(x)
+                    form.render(null, 'test1');
+                }
+            });
+        }
         // 提交
         form.on('submit(articleBtn)', function(data) {
             // data.field - 当前容器的全部表单字段，名值对形式：{name: value}
