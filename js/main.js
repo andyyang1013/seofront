@@ -53,25 +53,7 @@ function channel() {
         }
     });
 }
-// 栏目-下拉列表
-function columnSelect() {
-    $.ajax({
-        type: 'POST',
-        headers:ajaxHead,
-        data: { 
-            pageSize: '99' },
-        dataType: "json",
-        url: ajaxUrl + '/column/listByPage',
-        success: function(msg) {
-            var data = msg.data,x = '';
-            for (var i = 0; i < data.length; i++) {
-                x += "<option value='" + data[i].id + "'>" + data[i].name + "</option>";
-            }
-            console.log(x)
-            $(".column-select").append(x)
-        }
-    });
-}
+
 // 登录
 function login(){
     var psw = hex_md5($("#password").val())
