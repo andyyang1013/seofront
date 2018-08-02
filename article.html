@@ -198,7 +198,10 @@
     <script src="jslib/layui/layui.js"></script>
     <script src="js/main.js"></script>
     <script>
-    
+    // 所属项目-下拉列表
+    $(function(){
+    columnSelect()
+    })
     layui.use(['element', 'table', 'layer', 'layedit', 'form'], function() {
         var element = layui.element,
             table = layui.table,
@@ -298,8 +301,6 @@
                     layer.close(index);
                 });
             } else if (layEvent === 'edit') { //编辑
-                // 所属项目-下拉列表
-                columnSelect()
                 $('.mask-article-edit').show();
                 $("#layedit").html(data.content);
                 //构建编辑器

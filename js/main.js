@@ -67,6 +67,7 @@ function columnSelect() {
             for (var i = 0; i < data.length; i++) {
                 x += "<option value='" + data[i].id + "'>" + data[i].name + "</option>";
             }
+            console.log(x)
             $(".column-select").append(x)
         }
     });
