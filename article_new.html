@@ -46,7 +46,7 @@
                 新增文章
             </h2>
             <div class="search-form">
-                <form class="layui-form " id="articleNew">
+                <form class="layui-form " id="articleNew" lay-filter="test1">
                     <!-- <form class="layui-form " id="articleNew"> -->
                     <div class="layui-form-item fl-33 ">
                         <label class="layui-form-label "><i class="required">*</i>文章名称：</label>
@@ -209,8 +209,7 @@
                 return layedit.sync(index);
             }
         })
-        
-        form.render('select','layui-form');
+        form.render(null, 'test1');
         // 提交
         form.on('submit(articleBtn)', function(data) {
             // data.field - 当前容器的全部表单字段，名值对形式：{name: value}
