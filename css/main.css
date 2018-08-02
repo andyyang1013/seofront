@@ -584,7 +584,7 @@ i {
 }
 .mask-preview .mask-container,
 .mask-article-edit .mask-container {
-    width: 1000px;
+    width:85%;
     height: auto;
     max-height: 80%;
     box-sizing: border-box;
