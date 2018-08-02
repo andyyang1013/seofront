@@ -208,26 +208,7 @@
                 return layedit.sync(index);
             }
         })
-        columnSelect1()
-        function columnSelect1() {
-            $.ajax({
-                type: 'POST',
-                headers:ajaxHead,
-                data: { 
-                    pageSize: '99' },
-                dataType: "json",
-                url: ajaxUrl + '/column/listByPage',
-                success: function(msg) {
-                    var data = msg.data,x = '';
-                    for (var i = 0; i < data.length; i++) {
-                        x += "<option value='" + data[i].id + "'>" + data[i].name + "</option>";
-                    }
-                    console.log(x)
-                    $(".column-select").append(x)
-                    form.render(null, 'test1');
-                }
-            });
-        }
+        columnSelect()
         // 提交
         form.on('submit(articleBtn)', function(data) {
             // data.field - 当前容器的全部表单字段，名值对形式：{name: value}
