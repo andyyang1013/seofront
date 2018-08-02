@@ -69,6 +69,7 @@ function columnSelect() {
             }
             console.log(x)
             $(".column-select").append(x)
+            form.render('select');
         }
     });
 }
