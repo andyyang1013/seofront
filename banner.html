@@ -259,8 +259,14 @@
                 $('.mask-banner-edit').find('input[name$="summary"]').val(data.summary);
                 $('.mask-banner-edit').find('.uploadImg-edit').attr('src', data.pictureUrl);
                 // 单选
-                // $('.mask-banner-edit').find('input[name$="visible"]')[data.visible].checked = 'checked';
-                // $('.mask-banner-edit').find(".layui-form-radio").eq(data.visible).addClass("layui-form-radioed").siblings(".layui-form-radio").removeClass("layui-form-radioed");
+                var visibleNum;
+                if (data.visible) {
+                    visibleNum = 0
+                }else{
+                    visibleNum = 1
+                }
+                $('.mask-banner-edit').find('input[name$="visible"]')[visibleNum].checked = 'checked';
+                form.render(); 
             }
         });
         // ----------编辑项目
