@@ -285,6 +285,14 @@
                 $('.mask-column-edit').find('input[name$="pictureUrl"]').val(data.pictureUrl);
                 $('.mask-column-edit').find('.uploadImg-edit').attr('src', data.pictureUrl);
                 // 单选
+                var visibleNum;
+                if (data.visible) {
+                    visibleNum = 0
+                }else{
+                    visibleNum = 1
+                }
+                $('.mask-column-edit').find('input[name$="visible"]')[visibleNum].checked = 'checked';
+                form.render(); 
                 // $('.mask-column-edit').find('input[name$="visible"]')[data.visible].checked = 'checked';
                 // $('.mask-column-edit').find(".layui-form-radio").eq(data.visible).addClass("layui-form-radioed").siblings(".layui-form-radio").removeClass("layui-form-radioed");
                 //同步更新缓存对应的值
