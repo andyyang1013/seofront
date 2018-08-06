@@ -341,16 +341,9 @@
                 $('.mask-article-edit').find('input[name$="desc"]').val(data.desc);
                 $('.mask-article-edit').find('input[name$="tags"]').val(data.tags);
                 // 单选
-                var recommendNum;
-                if (data.recommend) {
-                    recommendNum = 0
-                }else{
-                    recommendNum = 1
-                }
-                $('.mask-article-edit').find('input[name$="recommend"]')[recommendNum].checked = 'checked';
+                $('.mask-article-edit').find('input[name$="recommend"][value$='+data.recommend+']').checked = 'checked';
                 // 栏目
-                console.log(data.columnId);
-                $('.mask-article-edit').find('option[value='+data.columnId+']').prop("selected",true);;
+                $('.mask-article-edit').find('option[value='+data.columnId+']').prop("selected",true);
                 form.render(); 
             }
         });
