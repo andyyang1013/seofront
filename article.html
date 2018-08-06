@@ -273,7 +273,6 @@
                     for (var i = 0; i < data.length; i++) {
                         x += "<option value='" + data[i].id + "'>" + data[i].name + "</option>";
                     }
-                    console.log(x)
                     $(".column-select").append(x)
                     form.render(null, 'test1'); 
                 }
@@ -349,6 +348,9 @@
                     recommendNum = 1
                 }
                 $('.mask-article-edit').find('input[name$="recommend"]')[recommendNum].checked = 'checked';
+                // 栏目
+                console.log(data.columnId)
+                $('.mask-article-edit').find('input[name$="columnId"]')[data.columnId].checked = 'checked';
                 form.render(); 
             }
         });
