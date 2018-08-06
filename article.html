@@ -349,8 +349,8 @@
                 }
                 $('.mask-article-edit').find('input[name$="recommend"]')[recommendNum].checked = 'checked';
                 // 栏目
-                console.log(data.columnId)
-                $('.mask-article-edit').find('option[value='+data.columnId+']').atrr('selected','selected');
+                console.log(data.columnId);
+                $('.mask-article-edit').find('option[value='+data.columnId+']').prop("selected",true);;
                 form.render(); 
             }
         });
