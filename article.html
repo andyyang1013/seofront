@@ -341,7 +341,7 @@
                 $('.mask-article-edit').find('input[name$="desc"]').val(data.desc);
                 $('.mask-article-edit').find('input[name$="tags"]').val(data.tags);
                 // 单选
-                $('.mask-article-edit').find('input[name$="recommend"][value$='+data.recommend+']').checked = 'checked';
+                $(':radio[name="recommend"]').attr("checked",data.recommend);
                 // 栏目
                 $('.mask-article-edit').find('option[value='+data.columnId+']').prop("selected",true);
                 form.render(); 
